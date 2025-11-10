@@ -1,7 +1,7 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
 
 * {
-  font-family: "Walter Turncoat", cursive;
+  font-family: "Momo Trust Display", sans-serif;
   font-weight: 400;
   font-style: normal;
   box-sizing: border-box;
@@ -19,20 +19,25 @@ body {
 }
 
 h1 {
-  text-align: center;
-  font-size: 60px;
+  font-size: 72px;
+  background: -webkit-linear-gradient(#a27b33, #eb8d13);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h2 {
   text-align: center;
   padding: 12px 0;
   font-weight: bold;
-  font-size: 30px;
-  color: white;
+  font-size: 40px;
+  color: #b09724;
 }
 .frame {
   width: 85%;
-  max-width: 900px;
+  max-width: 1000px;
   min-height: 300px;
   margin: auto;
   background-color: #d3d3d3;
@@ -104,4 +109,27 @@ button:hover {
 .signup-link a:hover,
 .login-link a:hover {
   text-decoration: underline;
+}
+
+/* user description */
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.logout {
+  display: inline;
+  max-width: 150px;
+  margin: 0;
+}
+
+.user-desc {
+  gap: 6px;
+  display: flex;
+  margin: 0;
+}
+
+.user-name {
+  color: rgb(187, 110, 16);
 }

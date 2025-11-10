@@ -9,7 +9,7 @@ export default function LoginPage() {
     password: "",
   });
 
-  const { setIsLoading, snackBar } = useContext(GeneralContext);
+  const { setIsLoading, snackBar, setUser } = useContext(GeneralContext);
 
   const navigate = useNavigate();
 
@@ -51,7 +51,12 @@ export default function LoginPage() {
       }
 
       const userData = await response.json();
-      console.log(userData);
+
+      if (userData.user.token) {
+        localStorage.setItem("token", userData.user.token);
+      }
+
+      setUser(userData);
       navigate("/");
     } catch (error) {
       console.log(error);
