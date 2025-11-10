@@ -1,0 +1,107 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Walter+Turncoat&display=swap"); */
+
+* {
+  font-family: "Walter Turncoat", cursive;
+  font-weight: 400;
+  font-style: normal;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(#ffe4e1, #f5fffa);
+}
+
+h1 {
+  text-align: center;
+  font-size: 60px;
+}
+
+h2 {
+  text-align: center;
+  padding: 12px 0;
+  font-weight: bold;
+  font-size: 30px;
+  color: white;
+}
+.frame {
+  width: 85%;
+  max-width: 900px;
+  min-height: 300px;
+  margin: auto;
+  background-color: #d3d3d3;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 12px 16px;
+}
+
+.smallFrame {
+  width: 300px;
+  margin: 16px auto;
+  padding: 12px;
+  background-color: #7a7add;
+  border-radius: 6px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: snow;
+}
+
+input {
+  display: block;
+  padding: 8px 12px;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+button {
+  margin: 30px 0;
+  background-color: #f5fffa;
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  padding: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #233135;
+  color: white;
+}
+
+.signup-link a,
+.login-link a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+.signup-link,
+.login-link {
+  text-align: center;
+}
+
+.signup-link a,
+.login-link a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+.signup-link a:hover,
+.login-link a:hover {
+  text-decoration: underline;
+}
