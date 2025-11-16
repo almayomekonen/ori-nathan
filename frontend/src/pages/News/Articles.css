@@ -31,3 +31,26 @@ td button {
   color: initial;
   display: inline;
 }
+
+.btnFrame {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.return-link-ancor {
+  text-decoration: none;
+}
+
+.return-link {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+label {
+  font-size: 20px;
+  background: -webkit-linear-gradient(#a27b33, #eb8d13);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

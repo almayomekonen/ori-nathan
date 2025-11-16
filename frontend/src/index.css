@@ -16,6 +16,7 @@ html {
 
 body {
   background: linear-gradient(#ffe4e1, #f5fffa);
+  padding: 2rem 0;
 }
 
 h1 {
@@ -26,6 +27,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 h2 {

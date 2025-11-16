@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./Articles.css";
 import { FaTrash } from "react-icons/fa6";
 import { AiFillEdit } from "react-icons/ai";
+import { FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Articles() {
   const [articlesData, setArticlesData] = useState([]);
@@ -50,6 +52,14 @@ export default function Articles() {
   return (
     <>
       <h2>Our Articles</h2>
+      <div className="btnFrame">
+        <Link className="return-link-ancor" to="/article/new">
+          <button className="return-link">
+            <FaPlus /> New Article
+          </button>
+        </Link>
+      </div>
+
       <table>
         <thead>
           <tr>
