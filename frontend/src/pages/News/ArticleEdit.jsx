@@ -1,20 +1,120 @@
 import { AiOutlineLeft } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import "./Articles.css";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { GeneralContext } from "../../App";
 
 export default function ArticleEdit() {
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     title: "",
     publishDate: "",
     createdAt: "",
-    Views: "",
+    views: "",
   });
+
+  const navigate = useNavigate();
+  const { setIsLoading, user } = useContext(GeneralContext);
+
+  useEffect(() => {
+    if (id === "new") {
+      setFormData({
+        title: "",
+        publishDate: "",
+        createdAt: "",
+        views: "",
+      });
+    } else {
+      setIsLoading(true);
+      async function fetchArticles() {
+        const token = localStorage.getItem("token");
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/edit-article/${id}`,
+            {
+              method: "GET",
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Something went wrong, please try again later...");
+          }
+
+          const data = await response.json();
+          setFormData({
+            ...data,
+          });
+          console.log(data);
+        } catch (error) {
+          console.log(error, "");
+        } finally {
+          setIsLoading(false);
+        }
+      }
+
+      fetchArticles();
+    }
+  }, [id, setIsLoading]);
+
+  async function handleSubmit(event) {
+    console.log(event, "click");
+
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      if (!user || !user.userId) {
+        setIsLoading(false);
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+      const userId = user.userId;
+
+      const response = await fetch(
+        `http://localhost:3000/api${
+          formData.id ? `/edit-article/${id}` : `/add-article/${userId}`
+        }`,
+        {
+          method: formData.id ? "PUT" : "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            ...formData,
+            userId,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong, please try again later...");
+      }
+      const data = await response.json();
+      console.log(data);
+      setFormData(data);
+      navigate("/");
+    } catch (error) {
+      console.log(error, "");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   function handleInputChange(event) {
     const { name, value } = event.target;
 
-    //
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   }
 
   return (
@@ -27,7 +127,7 @@ export default function ArticleEdit() {
         </Link>
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title">
           Title:
           <input
@@ -35,29 +135,32 @@ export default function ArticleEdit() {
             id="title"
             name="title"
             placeholder="Your Title"
-            value={formData.title}
+            value={formData.title || ""}
+            onChange={handleInputChange}
           />
         </label>
 
-        <label htmlFor="publish-date">
+        <label htmlFor="publishDate">
           Publish Date:
           <input
             type="text"
-            id="publish-date"
-            name="publish-date"
+            id="publishDate"
+            name="publishDate"
             placeholder="Publish Date"
-            value={formData.publishDate}
+            value={formData.publishDate || ""}
+            onChange={handleInputChange}
           />
         </label>
 
-        <label htmlFor="created-at">
+        <label htmlFor="createdAt">
           CreatedAt:
           <input
             type="text"
-            id="created-at"
-            name="created-at"
+            id="createdAt"
+            name="createdAt"
             placeholder="CreatedAt"
-            value={formData.createdAt}
+            value={formData.createdAt || ""}
+            onChange={handleInputChange}
           />
         </label>
 
@@ -68,9 +171,14 @@ export default function ArticleEdit() {
             id="views"
             name="views"
             placeholder="Your Views"
-            value={formData.Views}
+            value={formData.views || ""}
+            onChange={handleInputChange}
           />
         </label>
+
+        <button type="submit">
+          {id !== "new" ? "Save an Article" : "Add an Article"}
+        </button>
       </form>
     </>
   );

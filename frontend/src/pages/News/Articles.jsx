@@ -82,9 +82,11 @@ export default function Articles() {
               <td>{article.publishedAt}</td>
               <td>{article.views}</td>
               <td>
-                <button>
-                  <AiFillEdit />
-                </button>
+                <Link to={`/article/${article._id}`}>
+                  <button>
+                    <AiFillEdit />
+                  </button>
+                </Link>
               </td>
               <td>
                 <button>

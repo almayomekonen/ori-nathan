@@ -51,6 +51,6 @@ td button {
 label {
   font-size: 20px;
   background: -webkit-linear-gradient(#a27b33, #eb8d13);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
 }
