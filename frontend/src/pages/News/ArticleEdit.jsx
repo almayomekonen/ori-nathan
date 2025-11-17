@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import "./Articles.css";
 import { useState, useContext, useEffect } from "react";
 import { GeneralContext } from "../../App";
+import { getToken } from "../../utils/util";
 
 export default function ArticleEdit() {
   const { id } = useParams();
@@ -14,10 +15,10 @@ export default function ArticleEdit() {
   });
 
   const navigate = useNavigate();
-  const { setIsLoading, user } = useContext(GeneralContext);
+  const { setIsLoading, user, snackBar } = useContext(GeneralContext);
 
   useEffect(() => {
-    if (id === "new") {
+    if (id === "new" || !id) {
       setFormData({
         title: "",
         publishDate: "",
@@ -27,7 +28,7 @@ export default function ArticleEdit() {
     } else {
       setIsLoading(true);
       async function fetchArticles() {
-        const token = localStorage.getItem("token");
+        const token = getToken();
         try {
           const response = await fetch(
             `http://localhost:3000/api/edit-article/${id}`,
@@ -62,33 +63,45 @@ export default function ArticleEdit() {
   }, [id, setIsLoading]);
 
   async function handleSubmit(event) {
-    console.log(event, "click");
-
     event.preventDefault();
     setIsLoading(true);
 
     try {
-      if (!user || !user.userId) {
+      if (!user || !user.user || !user.user.id) {
         setIsLoading(false);
         return;
       }
 
-      const token = localStorage.getItem("token");
-      const userId = user.userId;
+      if (
+        !formData.views ||
+        !formData.publishDate ||
+        !formData.createdAt ||
+        !formData.title
+      ) {
+        snackBar("All fields are required");
+        setIsLoading(false);
+        return;
+      }
+
+      const token = getToken();
+      const userId = user.user.id;
 
       const response = await fetch(
         `http://localhost:3000/api${
-          formData.id ? `/edit-article/${id}` : `/add-article/${userId}`
+          formData._id ? `/edit-article/${id}` : `/add-article/${userId}`
         }`,
         {
-          method: formData.id ? "PUT" : "POST",
+          method: formData._id ? "PUT" : "POST",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            ...formData,
+            title: formData.title,
+            createdAt: formData.createdAt,
+            publishDate: formData.publishDate,
+            views: Number(formData.views),
             userId,
           }),
         }
@@ -98,6 +111,7 @@ export default function ArticleEdit() {
         throw new Error("Something went wrong, please try again later...");
       }
       const data = await response.json();
+      snackBar("Article updated Successfully");
       console.log(data);
       setFormData(data);
       navigate("/");
@@ -143,7 +157,7 @@ export default function ArticleEdit() {
         <label htmlFor="publishDate">
           Publish Date:
           <input
-            type="text"
+            type="date"
             id="publishDate"
             name="publishDate"
             placeholder="Publish Date"
@@ -155,7 +169,7 @@ export default function ArticleEdit() {
         <label htmlFor="createdAt">
           CreatedAt:
           <input
-            type="text"
+            type="date"
             id="createdAt"
             name="createdAt"
             placeholder="CreatedAt"
@@ -167,7 +181,7 @@ export default function ArticleEdit() {
         <label htmlFor="views">
           Views:
           <input
-            type="text"
+            type="number"
             id="views"
             name="views"
             placeholder="Your Views"

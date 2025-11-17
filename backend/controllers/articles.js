@@ -26,11 +26,11 @@ exports.articles = async (req, res) => {
 // addArticle
 exports.addArticle = async (req, res) => {
   try {
-    const { title, createdAt, publishedAt, views } = req.body;
+    const { title, createdAt, publishDate, views } = req.body;
 
     const userId = req.params.userId;
 
-    if (!title || !createdAt || !publishedAt || !views) {
+    if (!title || !createdAt || !publishDate || !views) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -42,11 +42,13 @@ exports.addArticle = async (req, res) => {
     const newArticle = new Article({
       title,
       createdAt: new Date(),
-      publishedAt: new Date(publishedAt),
+      publishDate: new Date(publishDate),
       views,
     });
 
     await newArticle.save();
+
+    res.json(newArticle);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
@@ -57,14 +59,13 @@ exports.addArticle = async (req, res) => {
 exports.getArticle = async (req, res) => {
   try {
     const articleId = req.params.id;
-    // /edit/news/6911b54a814453c5a752747b
 
     const article = await Article.findById(articleId);
     if (!article) {
       return res.status(404).json({ message: "Article not found.." });
     }
 
-    res.json(article);
+    res.json({ ...article.toObject(), id: article._id });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
@@ -74,35 +75,52 @@ exports.getArticle = async (req, res) => {
 // editArticle
 exports.editArticle = async (req, res) => {
   try {
-    const { id } = req.params.id;
+    const id = req.params.id;
     if (!id) {
       return res.status(400).json({ message: "User id not" });
     }
 
-    const { title, createdAt, publishedAt, views } = req.body;
+    const { title, createdAt, publishDate, views } = req.body;
 
-    if (!title || !createdAt || !publishedAt || !views) {
+    if (!title || !createdAt || !publishDate || !views) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
     const updatedArticle = await Article.findByIdAndUpdate(id, {
       title,
       createdAt,
-      publishedAt,
+      publishDate,
       views,
     });
 
     if (!updatedArticle) {
       return res.status(404).json({ message: "Article not found.." });
     }
+
+    res.json(updatedArticle);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// deleteArticle
-exports.editArticle = async (req, res) => {};
+// // deleteArticle
+exports.deleteArticle = async (req, res) => {
+  const articleId = req.params.id;
 
-// recycleBin
-exports.editArticle = async (req, res) => {};
+  try {
+    const article = await Article.findByIdAndDelete(articleId);
+
+    if (!article) {
+      return res.status(404).json({ message: "Article not found.." });
+    }
+
+    res.status(200).json({ message: "Article deleted successfully💥" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// // recycleBin
+// exports.editArticle = async (req, res) => {};

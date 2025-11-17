@@ -11,7 +11,7 @@ const articleSchema = new mongoose.Schema({
     default: Date.now,
   },
 
-  publishedAt: {
+  publishDate: {
     type: Date,
     default: Date.now,
   },
