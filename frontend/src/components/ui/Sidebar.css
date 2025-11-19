@@ -1,0 +1,66 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 300px;
+  background: linear-gradient(#282c34, #1a1f22);
+  color: white;
+  padding: 20px;
+  border-right: 3px solid #b4efff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #b4efff;
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #78cfe8;
+}
+
+.stats-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: #78cfe8;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  gap: 12px;
+  border: 1px solid #027373;
+  transition: transform 0.3s, background 0.3s;
+  cursor: pointer;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  background-color: #282c34;
+  color: #78cfe8;
+}
+
+.stat-icon {
+  height: 22px;
+}
+
+.views-color {
+  color: #515865;
+}

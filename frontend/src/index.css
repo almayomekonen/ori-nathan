@@ -15,52 +15,45 @@ html {
 }
 
 body {
-  background: linear-gradient(#ffe4e1, #f5fffa);
+  background: #282c34;
   padding: 2rem 0;
 }
 
 h1 {
-  font-size: 72px;
-  background: -webkit-linear-gradient(#a27b33, #eb8d13);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
+  color: #61dafb;
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 12px;
 }
 
 h2 {
   text-align: center;
-  padding: 12px 0;
   font-weight: bold;
-  font-size: 40px;
-  color: #b09724;
+  font-size: 22px;
 }
+
 .frame {
   width: 85%;
-  max-width: 1000px;
+  max-width: 900px;
   min-height: 300px;
   margin: auto;
-  background-color: #d3d3d3;
+  background-color: #ffffffc9;
   border-radius: 6px;
   box-sizing: border-box;
-  padding: 12px 16px;
+  padding: 8px 16px;
 }
 
 .smallFrame {
-  width: 300px;
+  width: 250px;
   margin: 16px auto;
   padding: 12px;
-  background-color: #7a7add;
+  background-color: #b4efff;
   border-radius: 6px;
 }
 
 label {
   display: block;
   margin-bottom: 10px;
-  font-size: 20px;
-  color: snow;
 }
 
 input {
@@ -69,11 +62,13 @@ input {
   width: 100%;
   border: 1px solid black;
   border-radius: 5px;
+  margin-top: 5px;
 }
 
 button {
   margin: 30px 0;
-  background-color: #f5fffa;
+  background-color: #282c34;
+  color: white;
   display: block;
   width: 100%;
   font-weight: bold;
@@ -90,12 +85,6 @@ button:hover {
   color: white;
 }
 
-.signup-link a,
-.login-link a {
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-}
 .signup-link,
 .login-link {
   text-align: center;
@@ -104,8 +93,7 @@ button:hover {
 .signup-link a,
 .login-link a {
   text-decoration: none;
-  color: white;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .signup-link a:hover,

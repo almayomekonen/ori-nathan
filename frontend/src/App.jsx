@@ -1,9 +1,9 @@
-import { FcNews } from "react-icons/fc";
 import { Router, RouterAuth } from "./Router";
 import React, { useState, useEffect } from "react";
 import Logout from "./pages/Auth/Logout";
 import Loader from "./components/ui/Loader";
 import Snackbar from "./components/ui/Snackbar";
+import Sidebar from "./components/ui/Sidebar";
 
 export const GeneralContext = React.createContext();
 
@@ -40,11 +40,9 @@ export default function App() {
 
   return (
     <GeneralContext.Provider value={{ user, snackBar, setIsLoading, setUser }}>
+      {user && <Sidebar />}
       <div>
-        <h1>
-          News Management <FcNews />
-        </h1>
-
+        <h1>News Management</h1>
         <div className="frame">
           {user && <Logout />}
           {isLoading && <Loader />}

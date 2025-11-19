@@ -62,58 +62,60 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="smallFrame">
-      <h2>
-        Signup <FaUserLock />
-      </h2>
+    <>
+      <div className="smallFrame">
+        <h2>
+          Signup <FaUserLock />
+        </h2>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="full-name">
-          full name
-          <input
-            name="fullName"
-            id="full-name"
-            type="text"
-            onChange={handleInputChange}
-          />
-        </label>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="full-name">
+            full name
+            <input
+              name="fullName"
+              id="full-name"
+              type="text"
+              onChange={handleInputChange}
+            />
+          </label>
 
-        <label htmlFor="username">
-          username
-          <input
-            name="username"
-            id="username"
-            type="text"
-            onChange={handleInputChange}
-          />
-        </label>
+          <label htmlFor="username">
+            username
+            <input
+              name="username"
+              id="username"
+              type="text"
+              onChange={handleInputChange}
+            />
+          </label>
 
-        <label htmlFor="password">
-          Password
-          <input
-            name="password"
-            id="password"
-            type="password"
-            onChange={handleInputChange}
-          />
-        </label>
+          <label htmlFor="password">
+            Password
+            <input
+              name="password"
+              id="password"
+              type="password"
+              onChange={handleInputChange}
+            />
+          </label>
 
-        <label htmlFor="email">
-          Email
-          <input
-            name="email"
-            id="email"
-            type="email"
-            onChange={handleInputChange}
-          />
-        </label>
+          <label htmlFor="email">
+            Email
+            <input
+              name="email"
+              id="email"
+              type="email"
+              onChange={handleInputChange}
+            />
+          </label>
 
-        <button>Signup</button>
-      </form>
+          <button>Signup</button>
+        </form>
+      </div>
 
       <p className="signup-link">
         <Link to="/">Click here to login</Link>
       </p>
-    </div>
+    </>
   );
 }
